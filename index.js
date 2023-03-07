@@ -11,6 +11,9 @@ const { Builder, By, Key, until } = require("selenium-webdriver");
     userName.sendKeys("JainR");
     password.sendKeys("Abcd1234$");
     button.click();
+    await driver.wait(until.titleIs("Origin - Home Page"), 30000);
+    // var homepage = driver.wait(until.titleContains("Origin - Home Page"));
   } finally {
+    driver.quit();
   }
 })();
