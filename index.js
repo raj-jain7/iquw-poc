@@ -1,7 +1,6 @@
-const { Builder, By, Key, until } = require("selenium-webdriver");
+const { By, until } = require("selenium-webdriver");
 
-async function driver() {
-  let driver = new Builder().forBrowser("chrome").build();
+async function webDriver(driver) {
   try {
     await driver.get("https://iquw-uat3.sequel.com/origin");
     var loginForm = driver.wait(until.elementLocated(By.tagName("form")));
@@ -12,13 +11,8 @@ async function driver() {
     password.sendKeys("Abcd1234$");
     button.click();
     await driver.wait(until.titleIs("Origin - Home Page"));
-    searchLink = driver.findElement(By.id("btn-dashboard-search"));
-    searchLink.click();
-    await driver.wait(until.titleIs("Origin - Search"));
-    policyLink = driver.findElement(By.id("filter-search-by-policy"));
-    policyLink.click();
   } finally {
   }
 }
 
-driver();
+exports.webDriver = webDriver;
