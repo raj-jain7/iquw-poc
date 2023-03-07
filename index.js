@@ -11,9 +11,12 @@ const { Builder, By, Key, until } = require("selenium-webdriver");
     userName.sendKeys("JainR");
     password.sendKeys("Abcd1234$");
     button.click();
-    await driver.wait(until.titleIs("Origin - Home Page"), 30000);
-    // var homepage = driver.wait(until.titleContains("Origin - Home Page"));
+    await driver.wait(until.elementsLocated(By.id("btn-dashboard-search")));
+    searchLink = driver.findElement(By.id("btn-dashboard-search"));
+    searchLink.click();
+    await driver.wait(until.elementsLocated(By.id("filter-search-by-policy")));
+    policyLink = driver.findElement(By.id("filter-search-by-policy"));
+    policyLink.click();
   } finally {
-    driver.quit();
   }
 })();
