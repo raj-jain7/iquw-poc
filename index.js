@@ -11,10 +11,10 @@ const { Builder, By, Key, until } = require("selenium-webdriver");
     userName.sendKeys("JainR");
     password.sendKeys("Abcd1234$");
     button.click();
-    await driver.wait(until.elementsLocated(By.id("btn-dashboard-search")));
+    await driver.wait(until.titleIs("Origin - Home Page"));
     searchLink = driver.findElement(By.id("btn-dashboard-search"));
     searchLink.click();
-    await driver.wait(until.elementsLocated(By.id("filter-search-by-policy")));
+    await driver.wait(until.titleIs("Origin - Search"));
     policyLink = driver.findElement(By.id("filter-search-by-policy"));
     policyLink.click();
   } finally {
