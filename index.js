@@ -1,6 +1,6 @@
 const { Builder, By, Key, until } = require("selenium-webdriver");
 
-(async function example() {
+async function driver() {
   let driver = new Builder().forBrowser("chrome").build();
   try {
     await driver.get("https://iquw-uat3.sequel.com/origin");
@@ -19,4 +19,6 @@ const { Builder, By, Key, until } = require("selenium-webdriver");
     policyLink.click();
   } finally {
   }
-})();
+}
+
+driver();
