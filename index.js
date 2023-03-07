@@ -1,7 +1,7 @@
 const { Builder, By, Key, until } = require("selenium-webdriver");
 
 (async function example() {
-  let driver = await new Builder().forBrowser("chrome").build();
+  let driver = new Builder().forBrowser("chrome").build();
   try {
     await driver.get("https://iquw-uat3.sequel.com/origin");
     var loginForm = driver.wait(until.elementLocated(By.tagName("form")));
