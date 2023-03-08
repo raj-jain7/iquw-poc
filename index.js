@@ -1,3 +1,4 @@
+require("chromedriver");
 const { By, until } = require("selenium-webdriver");
 
 async function webDriver(driver) {
