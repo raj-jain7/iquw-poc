@@ -1,30 +1,26 @@
-const chrome = require("../chrome");
-const firefox = require("../firefox");
-const { Builder, By, Key, until } = require("..");
-
-const width = 640;
-const height = 480;
+const chrome = require("selenium-webdriver/chrome");
+const firefox = require("selenium-webdriver/firefox");
+const { Builder, By, until } = require("selenium-webdriver");
+var webDriver = require("./index.js");
 
 let driver = new Builder()
   .forBrowser("chrome")
-  .setChromeOptions(
-    new chrome.Options().headless().windowSize({ width, height })
-  )
-  .setFirefoxOptions(
-    new firefox.Options().headless().windowSize({ width, height })
-  )
+  .setChromeOptions(new chrome.Options().headless())
   .build();
 
-driver
-  .get("http://www.google.com/ncr")
-  .then((_) =>
-    driver.findElement(By.name("q")).sendKeys("webdriver", Key.RETURN)
-  )
-  .then((_) => driver.wait(until.titleIs("webdriver - Google Search"), 1000))
-  .then(
-    (_) => driver.quit(),
-    (e) =>
-      driver.quit().then(() => {
-        throw e;
-      })
-  );
+async function headlessWebDriver(driver) {
+  try {
+    await driver.get("https://iquw-uat3.sequel.com/origin");
+    var loginForm = driver.wait(until.elementLocated(By.css("form")));
+    var userName = loginForm.findElement(By.name("Username"));
+    var password = loginForm.findElement(By.name("Password"));
+    var button = loginForm.findElement(By.name("button"));
+    userName.sendKeys("JainR");
+    password.sendKeys("Abcd1234$");
+    button.click();
+    await driver.wait(until.titleIs("Origin - Home Page"));
+  } finally {
+  }
+}
+
+webDriver(driver);
