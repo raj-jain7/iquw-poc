@@ -16,7 +16,7 @@ const renewPolicyReference =
 
 async function policyRenewal() {
   await webDriver.webDriver(driver);
-  await driver.get("https://iquw-uat3.sequel.com/origin/Policy/28");
+  await driver.get("https://iquw-uat3.sequel.com/origin/Policy/29");
   await driver
     .wait(until.elementLocated(By.className(dropDownClassName)))
     .then(function () {
