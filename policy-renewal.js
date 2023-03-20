@@ -1,7 +1,12 @@
-const { Builder, By, until, Browser } = require("selenium-webdriver");
+const chrome = require("selenium-webdriver/chrome");
+const { Builder, By, until } = require("selenium-webdriver");
 var webDriver = require("./index.js");
 
-let driver = new Builder().forBrowser("chrome").build();
+let driver = new Builder()
+  .forBrowser("chrome")
+  .setChromeOptions(new chrome.Options().headless())
+  .build();
+
 const dropDownClassName =
   "dropdown__label dropdown__label--policyscreengreenheader";
 
@@ -16,26 +21,32 @@ const renewPolicyReference =
 
 async function policyRenewal() {
   await webDriver.webDriver(driver);
-  await driver.get("https://iquw-uat3.sequel.com/origin/Policy/29");
+  await driver.get("https://iquw-uat3.sequel.com/origin/Policy/31");
+  await driver.sleep(20 * 1000);
+
   await driver
     .wait(until.elementLocated(By.className(dropDownClassName)))
     .then(function () {
       driver.findElement(By.className(dropDownClassName)).click();
     });
 
+  console.log("Dropdown clicked");
+
   var renew = driver.findElement(By.xpath(renewXpath));
   renew.click();
+
+  console.log("Renew clicked");
+
   await driver
     .wait(until.elementLocated(By.xpath(renewSectionXpath)))
     .then(function () {
       driver.findElement(By.xpath(renewSectionXpath)).click();
     });
 
-  await driver.sleep(10 * 1000);
-
+  await driver.sleep(60 * 1000);
   await driver.wait(until.elementLocated(By.xpath(renewPolicyReference)));
-
   driver.findElement(By.xpath(renewPolicyReference)).click();
+  console.log("Renew Policy Reference Clicked");
 }
 
 policyRenewal();

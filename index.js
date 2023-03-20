@@ -1,4 +1,3 @@
-require("chromedriver");
 const { By, until } = require("selenium-webdriver");
 
 async function webDriver(driver) {
@@ -11,6 +10,7 @@ async function webDriver(driver) {
     userName.sendKeys("JainR");
     password.sendKeys("Abcd1234$");
     button.click();
+    console.log("Login completed");
     await driver.wait(until.titleIs("Origin - Home Page"));
   } finally {
   }
